@@ -4,12 +4,19 @@ import { I18n } from "./core/i18n";
 import { naotuMenu } from "./lib/menu";
 import { naotuConf } from "./core/conf";
 import { openFileByDrop, openKm } from "./lib/file";
-import { saveDialog } from "./lib/dialog";
 import { monitorExitRequest } from "./lib/exit";
 import { naotuBase } from "./lib/base";
 import { onSelectedNodeItem, hasData } from "./lib/minder";
 import { remote } from "electron";
 import { shortcutDialog } from "./ui/shortcut";
+import { saveDialog, saveAsDialog, openDialog, exportDialog } from "./lib/dialog";
+
+// Expose core mind map actions to global window context for titlebar button handlers
+(window as any).openNaotuFile = openDialog;
+(window as any).saveNaotuFile = saveDialog;
+(window as any).saveAsNaotuFile = saveAsDialog;
+(window as any).exportNaotuFile = exportDialog;
+
 
 // 进入即记录日志
 logger.info("ipcRender init");

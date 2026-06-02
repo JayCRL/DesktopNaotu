@@ -18,6 +18,31 @@
         <img class="titlebar-icon" src="favicon.ico" alt="logo" onerror="this.style.display='none'" />
         <span class="titlebar-title">桌面版脑图</span>
       </div>
+      
+      <!-- 快捷功能键 -->
+      <div class="titlebar-actions">
+        <button class="titlebar-action-btn btn-open" onclick="window.openNaotuFile()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          打开/导入
+        </button>
+        <button class="titlebar-action-btn btn-save" onclick="window.saveNaotuFile()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          保存 (Ctrl+S)
+        </button>
+        <button class="titlebar-action-btn btn-saveas" onclick="window.saveAsNaotuFile()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+          另存为
+        </button>
+        <button class="titlebar-action-btn btn-export" onclick="window.exportNaotuFile()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          导出
+        </button>
+        <button class="titlebar-action-btn btn-sync" onclick="window.openSyncModal()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          同步手机端
+        </button>
+      </div>
+
       <div class="titlebar-controls">
         <div class="titlebar-btn btn-min" onclick="window.minimizeWindow()">
           <svg width="10" height="10" viewBox="0 0 12 12"><rect x="1.5" y="5.5" width="9" height="1" fill="#4B5563"/></svg>
@@ -33,6 +58,42 @@
 
     <kityminder-editor on-init="initEditor(editor, minder)"></kityminder-editor>
     <a id="bb" ng-click="shortcut1()"></a>
+
+    <!-- 同步移动端引导弹窗 -->
+    <div id="sync-modal" class="sync-modal-overlay" style="display: none;">
+      <div class="sync-modal-card">
+        <div class="sync-modal-header">
+          <h3>📱 移动端数据同步与学习助手</h3>
+          <button class="sync-modal-close" onclick="window.closeSyncModal()">&times;</button>
+        </div>
+        <div class="sync-modal-body">
+          <p class="sync-desc">
+            您的移动伴侣应用已就绪！电脑端负责“学习与记录”，移动端负责“闪卡复习与快速刷题”。您可以通过以下方式将当前的思维导图同步至手机端：
+          </p>
+          
+          <div class="sync-method-card">
+            <h4>☁️ 方法一：坚果云/WebDAV 云端同步 (推荐)</h4>
+            <ol>
+              <li>在电脑端，将您的脑图 <code>.km</code> 文件保存至您的 <strong>WebDAV (如坚果云) 同步文件夹</strong>中。</li>
+              <li>在手机端（Chrome 运行的移动页面）右上角点击 <strong>“同步” 图标按钮</strong>。</li>
+              <li>输入您的 WebDAV 服务器地址、账号以及应用密码，即可自动同步并提取卡片！</li>
+            </ol>
+          </div>
+
+          <div class="sync-method-card">
+            <h4>📂 方法二：本地文件导入 / 发送至手机</h4>
+            <ol>
+              <li>在电脑端标题栏点击 <strong>“保存”</strong> 或 <strong>“另存为”</strong>，获取您的脑图 <code>.km</code> 文件。</li>
+              <li>通过微信、QQ、或者数据线，将该文件直接发送到您的手机中。</li>
+              <li>在手机助手的今日闪卡或测试题下方，可以直接选择 <strong>导入该 <code>.km</code> 文件</strong> 自动同步。</li>
+            </ol>
+          </div>
+        </div>
+        <div class="sync-modal-footer">
+          <button class="sync-modal-btn" onclick="window.closeSyncModal()">我知道了</button>
+        </div>
+      </div>
+    </div>
   </body>
 
   <!-- bower:js -->
@@ -64,6 +125,13 @@
     window.closeWindow = () => {
       ipcRenderer.send("reqaction", "close");
     };
+    window.openSyncModal = () => {
+      document.getElementById("sync-modal").style.display = "flex";
+    };
+    window.closeSyncModal = () => {
+      document.getElementById("sync-modal").style.display = "none";
+    };
   </script>
   <script src="index.js"></script>
 </html>
+

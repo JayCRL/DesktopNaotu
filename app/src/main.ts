@@ -1,3 +1,10 @@
+// Polyfill Object.hasOwn for older Electron runtime support
+if (typeof (Object as any).hasOwn !== 'function') {
+  (Object as any).hasOwn = function(obj: any, prop: any) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+  };
+}
+
 // --> ipcMain 主线程使用的代码
 import { app, BrowserWindow, globalShortcut, Menu, ipcMain } from "electron";
 import { logger } from "./core/logger";
@@ -45,13 +52,15 @@ import { sIndexUrl } from "./define";
       minHeight: 700,
       width: userWidth,
       height: userHeight,
+      frame: false,
 
       fullscreenable: true,
       show: false,
       backgroundColor: "#fbfbfb",
       webPreferences: {
         nodeIntegration: true,
-        contextIsolation: false
+        contextIsolation: false,
+        enableRemoteModule: true
       },
     });
 
@@ -78,6 +87,14 @@ import { sIndexUrl } from "./define";
       if (mainWindow) {
         mainWindow.show();
         mainWindow.focus();
+        
+        // Pipe renderer console messages to main process logger for diagnosis
+        mainWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
+          logger.info(`[RENDERER CONSOLE] [Level ${level}] ${message} (at ${sourceId}:${line})`);
+        });
+        
+        // Open DevTools automatically for debugging
+        mainWindow.webContents.openDevTools();
       }
     });
 
@@ -154,6 +171,21 @@ import { sIndexUrl } from "./define";
 
         safeExit = true;
         app.quit(); //退出程序
+        break;
+      case "min":
+        if (mainWindow) mainWindow.minimize();
+        break;
+      case "max":
+        if (mainWindow) {
+          if (mainWindow.isMaximized()) {
+            mainWindow.unmaximize();
+          } else {
+            mainWindow.maximize();
+          }
+        }
+        break;
+      case "close":
+        if (mainWindow) mainWindow.close();
         break;
     }
   });

@@ -34,6 +34,37 @@ angular
     $scope.initEditor = function(editor: any, minder: any) {
       editor = editor;
       minder = minder;
+
+      const updateClasses = function() {
+        if (!minder) return;
+        minder.getAllNode().forEach(function(node: any) {
+          const rc = node.getRenderContainer();
+          if (rc && rc.node) {
+            const domNode = rc.node;
+            // Remove previous level classes
+            for (let i = 0; i < domNode.classList.length; i++) {
+              const cls = domNode.classList[i];
+              if (cls && cls.indexOf("level-") === 0) {
+                domNode.classList.remove(cls);
+                i--;
+              }
+            }
+            // Add level-X and minder-node classes
+            domNode.classList.add("level-" + node.getLevel());
+            domNode.classList.add("minder-node");
+
+            // Add selected class
+            if (node.isSelected()) {
+              domNode.classList.add("selected");
+            } else {
+              domNode.classList.remove("selected");
+            }
+          }
+        });
+      };
+
+      minder.on("layoutallfinish", updateClasses);
+      minder.on("selectionchange", updateClasses);
     };
   });
 

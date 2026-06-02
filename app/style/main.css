@@ -1,123 +1,983 @@
-html,
-body {
+/* ==========================================================
+   DesktopNaotu UI 升级样式表 - 白昼轻柔毛玻璃主题
+   ========================================================== */
+
+/* --- 1. 全局现代排版与系统字体 --- */
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    background-color: #f3f4f6 !important;
 }
 
-div.minder-editor-container{
-    top: 0!important;
+/* --- 2. 现代悬浮超细滚动条 --- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.25);
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.5);
 }
 
+/* --- 3. 自定义无边框窗口标题栏 --- */
+#desktop-titlebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    z-index: 99999;
+}
 
-
-.shortcut-dialog {
-    height: 600px;
-    overflow-y: scroll;
-    -moz-user-select: none;
-    /*火狐*/
-    -webkit-user-select: none;
-    /*webkit浏览器*/
-    -ms-user-select: none;
-    /*IE10*/
-    -khtml-user-select: none;
-    /*早期浏览器*/
+.titlebar-drag-region {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+    -webkit-app-region: drag; /* 允许窗口拖拽 */
     user-select: none;
-  }
-  .shortcut-dialog section {
-    min-width: 300px;
-    margin: 0 20px 20px 0;
-  }
-  .shortcut-dialog section h3 {
-    border-bottom: 1px solid #EEE;
-    font-size: 16px;
-    font-weight: bold;
-    padding-bottom: 5px;
-    margin-top: 0;
-  }
-  .shortcut-dialog section div.shortcut-group {
-    margin: 5px auto;
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut {
-    display: inline-block;
-    width: 220px;
-    text-align: right;
-    margin-right: 10px;
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key {
-    display: inline-block;
-    padding: 3px 8px 5px;
-    font-size: 12px;
-    font-weight: normal;
-    line-height: 14px;
-    color: #6e6e6e;
-    /* text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25); */
-    white-space: nowrap;
-    vertical-align: middle;
-    background-color: #fcfcfc;
-    border-radius: 3px;
-    border: 1px solid #cccccc;
-    text-transform: capitalize;
-    box-shadow: inset 0 -2px #ebebeb, inset 0 -3px #ffffff, 0 1px 2px rgba(255, 255, 255, 0.3);
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key:active {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    box-shadow: inset 0 -1px #ebebeb, inset 0 -2px #ffffff, 0 1px 1px rgba(255, 255, 255, 0.3);
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key:active:after {
-    transform: translate(0, 1px);
-  }
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.ctrl,
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.shift,
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.alt,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.up,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.down,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.left,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.right {
-    text-indent: 99999px;
-    position: relative;
-    width: 9px;
-  }
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.ctrl:after,
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.shift:after,
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.alt:after,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.up:after,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.down:after,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.left:after,
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.right:after {
-    display: block;
-    position: absolute;
-    text-align: center;
-    left: 5px;
-    top: 4px;
+}
+
+.titlebar-icon {
     width: 16px;
     height: 16px;
-    text-indent: 0;
-  }
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.ctrl:after {
-    content: '⌘';
-  }
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.shift:after {
-    content: '⇧';
-  }
-  .mac .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.alt:after {
-    content: '⌥';
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.up:after {
-    content: '↑';
-    top: 2px;
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.down:after {
-    content: '↓';
-    top: 2px;
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.left:after {
-    content: '←';
-    top: 2px;
-  }
-  .shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key.right:after {
-    content: '→';
-    top: 2px;
-  }
+    margin-right: 8px;
+}
+
+.titlebar-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4b5563;
+    letter-spacing: 0.5px;
+}
+
+.titlebar-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    -webkit-app-region: no-drag; /* 按钮区域禁止拖拽，保证可点击 */
+}
+
+/* macOS 风格胶囊微光控制按钮 */
+.titlebar-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.titlebar-btn svg {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.titlebar-controls:hover .titlebar-btn svg {
+    opacity: 1;
+}
+
+.btn-min {
+    background-color: #ffbd2e;
+}
+.btn-min:hover {
+    background-color: #e0a31d;
+}
+
+.btn-max {
+    background-color: #27c93f;
+}
+.btn-max:hover {
+    background-color: #1a9c2b;
+}
+
+.btn-close {
+    background-color: #ff5f56;
+}
+.btn-close:hover {
+    background-color: #e0443e;
+}
+
+/* --- 4. 容器自适应与偏移 --- */
+div.minder-editor-container {
+    top: 36px !important; /* 预留出标题栏高度 */
+    height: calc(100% - 36px) !important;
+}
+
+/* 顶部工具栏高度增加并悬浮，将画布往下推 */
+.minder-editor {
+    top: 116px !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* --- 5. 浮动毛玻璃双面舱工具栏 (.top-tab) --- */
+.top-tab {
+    margin: 8px 12px 0 12px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(229, 231, 235, 0.5) !important;
+    position: relative;
+    z-index: 100;
+}
+
+/* 页签条美化 */
+.top-tab .nav-tabs {
+    background-color: rgba(243, 244, 246, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 0 !important;
+    height: 36px !important;
+    padding: 3px 8px 0 8px !important;
+}
+
+.top-tab .nav-tabs li a {
+    margin: 0 3px !important;
+    border: 0 !important;
+    padding: 6px 16px !important;
+    border-radius: 8px 8px 0 0 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #4b5563 !important;
+    background: transparent !important;
+    transition: all 0.25s ease !important;
+}
+
+.top-tab .nav-tabs li a:hover {
+    color: #4f46e5 !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.top-tab .nav-tabs li.active a {
+    background-color: rgba(255, 255, 255, 0.82) !important;
+    color: #4f46e5 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* 工具面板内容区美化 */
+.top-tab .tab-content {
+    height: 72px !important;
+    background-color: rgba(255, 255, 255, 0.82) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 0 !important;
+    padding: 4px 12px !important;
+}
+
+/* 按钮微动效与圆角 */
+.km-btn-item {
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+    margin: 0 2px !important;
+    background-color: transparent !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid transparent !important;
+}
+
+.km-btn-item:hover {
+    background-color: rgba(99, 102, 241, 0.06) !important;
+    border: 1px solid rgba(99, 102, 241, 0.1) !important;
+    transform: translateY(-1px) scale(1.02);
+}
+
+.km-btn-item:active {
+    background-color: rgba(99, 102, 241, 0.12) !important;
+    transform: translateY(0) scale(0.97);
+}
+
+/* 按钮分组分割线改为极其纤细 */
+.km-btn-group {
+    margin: 6px 0 !important;
+    border-right: 1px solid rgba(229, 231, 235, 0.6) !important;
+}
+
+/* 字体/背景颜色小色块圆角化 */
+.font-color-wrap, .bg-color-wrap {
+    border-radius: 6px !important;
+    border: 1px solid rgba(209, 213, 219, 0.6) !important;
+    overflow: hidden !important;
+}
+
+/* --- 6. 悬浮磨砂玻璃小组件 (Zoom & Navigator) --- */
+.nav-bar {
+    position: absolute !important;
+    width: 38px !important;
+    height: 220px !important;
+    padding: 6px 0 !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    background: rgba(255, 255, 255, 0.78) !important; /* 彻底去除红色！改为磨砂白 */
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    color: #4b5563 !important;
+    border-radius: 12px !important;
+    z-index: 10 !important;
+    border: 1px solid rgba(229, 231, 235, 0.6) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
+}
+
+.nav-bar .nav-btn {
+    width: 38px !important;
+    height: 26px !important;
+    line-height: 26px !important;
+    transition: all 0.2s ease !important;
+}
+
+.nav-bar .nav-btn:hover {
+    background-color: rgba(99, 102, 241, 0.08) !important;
+    color: #4f46e5 !important;
+    border-radius: 6px !important;
+}
+
+.nav-bar .nav-btn.active {
+    background-color: rgba(99, 102, 241, 0.12) !important;
+    color: #4f46e5 !important;
+}
+
+/* 滑块轨道微美化 */
+.nav-bar .zoom-pan {
+    width: 3px !important;
+    height: 60px !important;
+    background: rgba(229, 231, 235, 0.8) !important;
+    box-shadow: none !important;
+    border-radius: 4px !important;
+    margin: 6px auto !important;
+}
+
+/* 缩放定位点图标微美化 */
+.nav-bar .zoom-pan .origin:after {
+    background: #9ca3af !important;
+    width: 7px !important;
+    height: 2px !important;
+    left: 6px !important;
+}
+
+/* 滑块圆圈改为精致的微光紫色 */
+.nav-bar .zoom-pan .indicator {
+    width: 9px !important;
+    height: 9px !important;
+    left: -3px !important;
+    background: #4f46e5 !important;
+    box-shadow: 0 0 6px rgba(79, 70, 229, 0.6) !important;
+    border-radius: 50% !important;
+}
+
+/* 缩略导航地图卡片重构 */
+.nav-previewer {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(229, 231, 235, 0.6) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
+    left: 68px !important;
+    bottom: 30px !important;
+    overflow: hidden !important;
+    padding: 4px !important;
+}
+
+/* --- 7. 拟物化 3D 实体快捷键键帽 --- */
+.shortcut-dialog {
+    height: 520px;
+    overflow-y: scroll;
+    padding-right: 8px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.shortcut-dialog section h3 {
+    border-bottom: 2px solid rgba(229, 231, 235, 0.8) !important;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1f2937;
+    padding-bottom: 8px;
+    margin-top: 8px;
+}
+
+.shortcut-dialog section div.shortcut-group {
+    margin: 8px auto;
+    display: flex;
+    align-items: center;
+}
+
+.shortcut-dialog section div.shortcut-group span.shortcut {
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+    margin-right: 14px;
+}
+
+/* 精致 3D 实体按键 */
+.shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key {
+    display: inline-block;
+    padding: 4px 9px 5px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    line-height: 12px;
+    color: #4b5563 !important;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%) !important;
+    border: 1px solid #d1d5db !important;
+    border-bottom: 3px solid #9ca3af !important; /* 3D 厚度 */
+    border-radius: 6px !important;
+    text-transform: capitalize;
+    box-shadow: 0 1px 0px rgba(255, 255, 255, 0.8) inset, 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.1s ease !important;
+    cursor: pointer;
+}
+
+/* 键盘按下解压弹起反馈 */
+.shortcut-dialog section div.shortcut-group span.shortcut .shortcut-key:active {
+    border-bottom: 1px solid #9ca3af !important;
+    transform: translateY(2px) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* --- 8. 设置偏好弹窗美化与 iOS 滑动开关 --- */
+.modal-content {
+    border-radius: 16px !important;
+    border: 1px solid rgba(229, 231, 235, 0.5) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(229, 231, 235, 0.6) !important;
+    padding: 14px 20px !important;
+}
+
+.modal-header .modal-title {
+    font-weight: 700 !important;
+    color: #1f2937 !important;
+    font-size: 16px !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(229, 231, 235, 0.6) !important;
+    padding: 12px 20px !important;
+}
+
+/* Bootstrap Tabs 药丸化 */
+.modal-body .nav-tabs {
+    border-bottom: 0 !important;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.modal-body .nav-tabs li a {
+    border-radius: 20px !important;
+    padding: 6px 18px !important;
+    border: 1px solid rgba(229, 231, 235, 0.8) !important;
+    color: #4b5563 !important;
+    background-color: #fff !important;
+    transition: all 0.2s ease !important;
+    font-size: 12px;
+}
+
+.modal-body .nav-tabs li.active a {
+    background-color: #4f46e5 !important;
+    color: #fff !important;
+    border-color: #4f46e5 !important;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2) !important;
+}
+
+/* 控制台信息框 well 改为温润轻盈灰卡 */
+.modal-body .well {
+    background-color: rgba(243, 244, 246, 0.6) !important;
+    border: 1px solid rgba(229, 231, 235, 0.8) !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    font-size: 11px;
+    color: #374151;
+}
+
+/* 按钮现代微弹性动效 */
+.modal-footer .btn, .modal-body .btn {
+    border-radius: 8px !important;
+    padding: 6px 18px !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    transition: all 0.2s ease !important;
+}
+
+.modal-footer .btn-default, .modal-body .btn-default {
+    background-color: #f3f4f6 !important;
+    color: #4b5563 !important;
+    border: 1px solid rgba(229, 231, 235, 0.8) !important;
+}
+
+.modal-footer .btn-default:hover, .modal-body .btn-default:hover {
+    background-color: #e5e7eb !important;
+    color: #1f2937 !important;
+}
+
+.modal-footer .btn-primary, .modal-body .btn-primary {
+    background-color: #4f46e5 !important;
+    border-color: #4f46e5 !important;
+    color: #fff !important;
+}
+
+.modal-footer .btn-primary:hover, .modal-body .btn-primary:hover {
+    background-color: #4338ca !important;
+}
+
+/* iOS 风格滑动开关 (Checkbox 覆写) */
+.ios-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 4px;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.4);
+}
+
+.ios-switch-label {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    margin: 0 !important;
+    cursor: pointer;
+}
+
+.ios-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.ios-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.ios-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e5e7eb;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 24px;
+}
+
+.ios-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+input:checked + .ios-slider {
+    background-color: #4f46e5;
+}
+
+input:checked + .ios-slider:before {
+    transform: translateX(20px);
+}
+
+/* ==========================================================
+   9. 极致扁平现代化 SVG 矢量图标重构与画布配色美化
+   ========================================================== */
+
+/* 全面美化导图容器底色，去除老旧网格 */
+.minder-editor, .minder-editor svg {
+    background: #f8fafc !important; /* 极简浅灰蓝高品味背景 */
+}
+
+/* 下级节点连接线柔和靛蓝化 */
+svg.kityminder-core-canvas path[stroke] {
+    stroke: #818cf8 !important;
+    stroke-width: 2px !important;
+}
+
+/* 选中节点的高亮虚线框改用现代发光紫 */
+svg.kityminder-core-canvas rect[stroke*="#"] {
+    stroke: #6366f1 !important;
+    stroke-width: 2px !important;
+    filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.45)) !important;
+}
+
+/* 隐藏旧版 PNG 雪碧图背景 */
+.km-btn-icon {
+    background-image: none !important;
+}
+
+/* 完美注入现代化极简主义 SVG 矢量图标 */
+
+/* 撤销 (Undo) */
+.undo .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 重做 (Redo) */
+.redo .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 插入下级 (Append Child) */
+.append-child-node .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="18" y2="12"/><line x1="18" y1="12" x2="18" y2="18"/><circle cx="6" cy="12" r="2.5" fill="%2310b981"/><circle cx="18" cy="18" r="2.5" fill="%2310b981"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 插入同级 (Append Sibling) */
+.append-sibling-node .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%233b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="8" x2="18" y2="8"/><line x1="6" y1="16" x2="18" y2="16"/><circle cx="6" cy="8" r="2.5" fill="%233b82f6"/><circle cx="6" cy="16" r="2.5" fill="%233b82f6"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 插入上级 (Append Parent) */
+.append-parent-node .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="12" x2="6" y2="12"/><line x1="6" y1="12" x2="6" y2="6"/><circle cx="18" cy="12" r="2.5" fill="%23f59e0b"/><circle cx="6" cy="6" r="2.5" fill="%23f59e0b"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 编辑节点 (Edit Node) */
+.edit-node .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 删除节点 (Remove Node) */
+.remove-node .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 节点上移 (Move Up) */
+.arrange-up .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 节点下移 (Move Down) */
+.arrange-down .km-btn-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* 插入超链接 (Hyperlink) */
+.btn-group-vertical .hyperlink {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+/* 插入图片 (Image) */
+.btn-group-vertical .image-btn {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+/* 插入备注 (Note) */
+.btn-group-vertical .note-btn {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+/* ==========================================================
+   10. 高分辨率 SVG 矢量优先级徽章
+   ========================================================== */
+.tab-content .km-priority .km-priority-item .km-priority-icon {
+    background-image: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    transition: transform 0.2s ease !important;
+}
+
+.tab-content .km-priority .km-priority-item:hover .km-priority-icon {
+    transform: scale(1.15) !important;
+}
+
+/* 优先级 0 (清除) */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-0 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 1 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-1 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236366f1"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">1</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 2 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-2 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233b82f6"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">2</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 3 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-3 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2310b981"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">3</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 4 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-4 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f59e0b"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">4</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 5 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-5 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ef4444"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">5</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 6 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-6 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%238b5cf6"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">6</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 7 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-7 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ec4899"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">7</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 8 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-8 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2314b8a6"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">8</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 优先级 9 */
+.tab-content .km-priority .km-priority-item .km-priority-icon.priority-9 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2364748b"><circle cx="12" cy="12" r="11"/><text x="12" y="16.5" font-family="Inter, system-ui" font-size="13" font-weight="700" fill="white" text-anchor="middle">9</text></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* ==========================================================
+   11. 精美圆形扇区/环形 SVG 进度徽章
+   ========================================================== */
+.tab-content .km-progress .km-progress-item .km-progress-icon {
+    background-image: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    transition: transform 0.2s ease !important;
+}
+
+.tab-content .km-progress .km-progress-item:hover .km-progress-icon {
+    transform: scale(1.15) !important;
+}
+
+/* 进度 0 (清除) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-0 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 1 (0% 空进度轮) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-1 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-dasharray="3 3"><circle cx="12" cy="12" r="10"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 2 (1/8) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-2 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 18.7 5.3" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 3 (2/8 = 1/4) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-3 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 21.5 12" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 4 (3/8) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-4 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 18.7 18.7" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 5 (4/8 = 1/2) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-5 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 12 21.5" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 6 (5/8) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-6 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 5.3 18.7" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 7 (6/8 = 3/4) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-7 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 2.5 12" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 8 (7/8) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-8 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2.5"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 A 9.5 9.5 0 0 1 5.3 5.3" fill="none" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+/* 进度 9 (100% 满绿勾圆形徽章) */
+.tab-content .km-progress .km-progress-item .km-progress-icon.progress-9 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2310b981"><circle cx="12" cy="12" r="11"/><path d="M9 12l2 2 4-4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+/* ==========================================================
+   12. 全局控制与视图操作图标矢量化
+   ========================================================== */
+.font-bold {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.font-italics {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.clear-style-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20a6 6 0 0 0-12 0"/><path d="m9 14 3-3 3 3"/><path d="M12 2v9"/><path d="M12 11h.01"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.reset-layout-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.copy-style-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.paste-style-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.bg-color-wrap .quick-bg-color {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/></svg>') !important;
+    background-size: 16px !important;
+    background-position: center !important;
+}
+
+/* 垂直菜单组 (折叠、查找、区域选择、导出) */
+.btn-group-vertical .expand {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+.btn-group-vertical .select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-dasharray="4 4"/><circle cx="12" cy="12" r="2"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+.btn-group-vertical .search {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+.btn-group-vertical .export {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>') !important;
+    background-size: 18px !important;
+    background-position: center !important;
+}
+
+/* 左下角小导航缩放卡片控件 (zoom-in, zoom-out, hand, camera, nav-trigger) */
+.nav-bar .zoom-in .icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.nav-bar .zoom-out .icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.nav-bar .hand .icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M6 14a5 5 0 0 0 5 5h3a6 6 0 0 0 6-6V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"/></svg>') !important;
+    background-size: 16px !important;
+    background-position: center !important;
+}
+
+.nav-bar .camera .icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2 2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>') !important;
+    background-size: 16px !important;
+    background-position: center !important;
+}
+
+.nav-bar .nav-trigger .icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>') !important;
+    background-size: 16px !important;
+    background-position: center !important;
+}
+
+/* ==========================================================
+   13. 思维导图节点高奢拼色重塑与软化连接线
+   ========================================================== */
+
+/* 节点通用过渡动效 */
+g.minder-node rect,
+g.minder-node path {
+    transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.2s ease, filter 0.25s ease !important;
+}
+
+/* 根节点 Level 0 - 现代靛蓝卡片 */
+g.minder-node.level-0 rect,
+g.minder-node.level-0 path {
+    fill: #6366f1 !important;
+    stroke: #6366f1 !important;
+    rx: 14px !important; /* 优雅圆角 */
+    ry: 14px !important;
+    filter: drop-shadow(0 4px 10px rgba(99, 102, 241, 0.25)) !important;
+}
+
+g.minder-node.level-0 text {
+    fill: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* 一级分支 Level 1 - 极简白底描边卡片 */
+g.minder-node.level-1 rect,
+g.minder-node.level-1 path {
+    fill: #ffffff !important;
+    stroke: #cbd5e1 !important;
+    stroke-width: 1.5px !important;
+    rx: 8px !important;
+    ry: 8px !important;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.02)) !important;
+}
+
+g.minder-node.level-1 text {
+    fill: #1e1b4b !important; /* 深靛蓝字 */
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+/* 二级及以下叶子节点 Level 2+ - slate 优雅灰底卡片 */
+g.minder-node.level-2 rect,
+g.minder-node.level-2 path,
+g.minder-node.level-3 rect,
+g.minder-node.level-3 path,
+g.minder-node.level-4 rect,
+g.minder-node.level-4 path {
+    fill: #f8fafc !important;
+    stroke: #e2e8f0 !important;
+    stroke-width: 1px !important;
+    rx: 6px !important;
+    ry: 6px !important;
+}
+
+g.minder-node.level-2 text,
+g.minder-node.level-3 text,
+g.minder-node.level-4 text {
+    fill: #334155 !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+}
+
+/* 选中节点的 Figma 级别霓虹发光紫色高亮框 */
+g.minder-node.selected rect,
+g.minder-node.selected path {
+    stroke: #6366f1 !important;
+    stroke-width: 2px !important;
+    filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.45)) !important;
+}
+
+/* 画布连线软化 - 精美淡靛/灰蓝连线段 */
+svg.kityminder-core-canvas path:not(.minder-node path)[stroke] {
+    stroke: #a5b4fc !important; /* 淡靛色优雅虚化线条 */
+    stroke-width: 2px !important;
+}
+
+/* ==========================================================
+   14. 优先级/进度面板宽度及布局优化 (防止折行与裁剪)
+   ========================================================== */
+.tab-content .km-priority,
+.tab-content .km-progress {
+    width: 232px !important; /* 扩大宽度容纳 10 个项目在单行展示 */
+    margin: 4px 5px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    border-right: 1px solid rgba(229, 231, 235, 0.4) !important; /* 纤细微光分割线 */
+    padding-right: 6px !important;
+}
+
+.tab-content .km-priority .km-priority-item,
+.tab-content .km-progress .km-progress-item {
+    display: inline-block !important;
+    margin: 1px !important;
+    padding: 0 !important;
+}

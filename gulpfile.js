@@ -51,7 +51,8 @@ gulp.task("compile", function() {
       typescript({
         sourceMap: true,
         target: "ES2015",
-        module: "commonjs"
+        module: "commonjs",
+        additionalTscParameters: ["--skipLibCheck"]
       })
     )
     .pipe(gulp.dest("./dist/"));

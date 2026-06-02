@@ -12,6 +12,25 @@
   </head>
 
   <body ng-app="kityminderDemo" ng-controller="MainController">
+    <!-- 自定义无边框窗口标题栏 -->
+    <div id="desktop-titlebar">
+      <div class="titlebar-drag-region">
+        <img class="titlebar-icon" src="favicon.ico" alt="logo" onerror="this.style.display='none'" />
+        <span class="titlebar-title">桌面版脑图</span>
+      </div>
+      <div class="titlebar-controls">
+        <div class="titlebar-btn btn-min" onclick="window.minimizeWindow()">
+          <svg width="10" height="10" viewBox="0 0 12 12"><rect x="1.5" y="5.5" width="9" height="1" fill="#4B5563"/></svg>
+        </div>
+        <div class="titlebar-btn btn-max" onclick="window.maximizeWindow()">
+          <svg width="10" height="10" viewBox="0 0 12 12"><rect x="2.5" y="2.5" width="7" height="7" fill="none" stroke="#4B5563" stroke-width="1.2"/></svg>
+        </div>
+        <div class="titlebar-btn btn-close" onclick="window.closeWindow()">
+          <svg width="10" height="10" viewBox="0 0 12 12"><path d="M2.5,2.5 L9.5,9.5 M9.5,2.5 L2.5,9.5" stroke="#4B5563" stroke-width="1.2"/></svg>
+        </div>
+      </div>
+    </div>
+
     <kityminder-editor on-init="initEditor(editor, minder)"></kityminder-editor>
     <a id="bb" ng-click="shortcut1()"></a>
   </body>
@@ -21,13 +40,30 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/vendor.js"></script>
   <script>
+    // Polyfill Object.hasOwn for older Electron runtime support
+    if (typeof Object.hasOwn !== 'function') {
+      Object.hasOwn = function(obj, prop) {
+        return Object.prototype.hasOwnProperty.call(obj, prop);
+      };
+    }
+
     var exports = {};
     var $ = (jQuery = require("./js/jquery.min.js"));
 
     // Dependencies used by preference dialog
-    const {shell} = require("electron");
+    const {shell, ipcRenderer} = require("electron");
     const os = require("os");
     const fs = require("fs");
+
+    window.minimizeWindow = () => {
+      ipcRenderer.send("reqaction", "min");
+    };
+    window.maximizeWindow = () => {
+      ipcRenderer.send("reqaction", "max");
+    };
+    window.closeWindow = () => {
+      ipcRenderer.send("reqaction", "close");
+    };
   </script>
   <script src="index.js"></script>
 </html>

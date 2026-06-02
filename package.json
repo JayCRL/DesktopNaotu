@@ -34,7 +34,6 @@
     "browserify": "^16.2.3",
     "cross-var": "^1.1.0",
     "del": "^3.0.0",
-    "electron-installer-debian": "^3.1.0",
     "electron-packager": "^12.2.0",
     "grunt": "^1.0.4",
     "grunt-electron-installer": "^2.1.0",
@@ -63,5 +62,8 @@
     "hotkeys-js": "^3.6.2",
     "moment": "^2.23.0",
     "winston": "^3.1.0"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
   }
 }
